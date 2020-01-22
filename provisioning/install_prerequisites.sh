@@ -6,6 +6,7 @@ cat >>/etc/hosts<<EOF
 ${OKD_MASTER_NODE_1_IP} ${OKD_MASTER_NODE_1_HOSTNAME} console console.${DOMAIN}
 ${OKD_INFRA_NODE_1_IP} ${OKD_INFRA_NODE_1_HOSTNAME}
 ${OKD_WORKER_NODE_1_IP} ${OKD_WORKER_NODE_1_HOSTNAME}
+
 EOF
 
 # install the following base packages
@@ -16,7 +17,7 @@ yum install -y git
 yum install -y zile
 yum install -y nano
 yum install -y net-tools
-yum install -y docker
+yum install -y docker-1.13.1
 yum install -y bind-utils iptables-services
 yum install -y bridge-utils bash-completion
 yum install -y kexec-tools

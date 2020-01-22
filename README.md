@@ -28,11 +28,11 @@
 
 \* Below is the **_example configuration_** that we are going to refer **_through out this repository_**.\*
 
-| _Name_              | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
-| ------------------- | --------------- | --------- | ----- | ----- | --------- |
-| _okd-master-node-1_ | _100.10.10.100_ | _CentOS7_ | _1GB_ | _1_   | _24GB_    |
-| _okd-infra-node-1_  | _100.10.10.101_ | _CentOS7_ | _1GB_ | _1_   | _24GB_    |
-| _okd-worker-node-1_ | _100.10.10.102_ | _CentOS7_ | _1GB_ | _1_   | _24GB_    |
+| _Name_                          | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
+| ------------------------------- | --------------- | --------- | ----- | ----- | --------- |
+| _master-1.100.10.10.100.nip.io_ | _100.10.10.100_ | _CentOS7_ | _1GB_ | _1_   | _24GB_    |
+| _infra-1.100.10.10.101.nip.io_  | _100.10.10.101_ | _CentOS7_ | _1GB_ | _1_   | _24GB_    |
+| _worker-1.100.10.10.102.nip.io_ | _100.10.10.102_ | _CentOS7_ | _1GB_ | _1_   | _24GB_    |
 
 <a id="deploy"></a>
 
@@ -42,43 +42,43 @@
 
 **_Update the system and host names for all nodes_**
 
-- `100.10.10.100 (okd-master-node-1)`
-- `100.10.10.101 (okd-infra-node-1)`
-- `100.10.10.102 (okd-worker-node-1)`
+- `100.10.10.100 (master-1.100.10.10.100.nip.io)`
+- `100.10.10.101 (infra-1.100.10.10.101.nip.io)`
+- `100.10.10.102 (worker-1.100.10.10.102.nip.io)`
 
 **_Unix Command!!!_**
 
-`$ sudo yum update -y`
+`$ yum update -y`
 
-`$ sudo vi /etc/hostname` **_(OR)_** `$ sudo nmtui hostname`
+`$ vi /etc/hostname` **_(OR)_** `$ nmtui hostname`
 
 ## **_Step 2_**
 
 **_Enable SELINUX=enforcing on all master/worker/infra nodes_**
 
-- `100.10.10.100 (okd-master-node-1)`
-- `100.10.10.101 (okd-infra-node-1)`
-- `100.10.10.102 (okd-worker-node-1)`
+- `100.10.10.100 (master-1.100.10.10.100.nip.io)`
+- `100.10.10.101 (infra-1.100.10.10.101.nip.io)`
+- `100.10.10.102 (worker-1.100.10.10.102.nip.io)`
 
 **_Unix Command!!!_**
 
-`$ sudo vi /etc/selinux/config`
+`$ vi /etc/selinux/config`
 
 **_We can verify the status by running the below command. The correct status will not reflect once we changed until we reboot the machines_**
 
-`$ sudo sestatus`
+`$ sestatus`
 
 ## **_Step 3_**
 
 **_Reboot all master/worker/infra nodes_**
 
-- `100.10.10.100 (okd-master-node-1)`
-- `100.10.10.101 (okd-infra-node-1)`
-- `100.10.10.102 (okd-worker-node-1)`
+- `100.10.10.100 (master-1.100.10.10.100.nip.io)`
+- `100.10.10.101 (infra-1.100.10.10.101.nip.io)`
+- `100.10.10.102 (worker-1.100.10.10.102.nip.io)`
 
 **_Unix Command!!!_**
 
-`$ sudo reboot`
+`$ reboot`
 
 ## **_Step 4_**
 
@@ -95,11 +95,7 @@ _Checkout the code (git clone https://github.com/nvqchau/okd-installation-centos
 - `100.10.10.101 (okd-infra-node-1)`
 - `100.10.10.102 (okd-worker-node-1)`
 
-_Example copy to root folder and execution permissions can be applied by executing the below command._
-
-**_Unix Command!!!_**
-
-`$ chmod +x -R okd-installation-centos`
+_Example copy to root folder._
 
 ## **_Step 6_**
 
@@ -111,13 +107,15 @@ _Example copy to root folder and execution permissions can be applied by executi
 
 **_Unix Command!!!_**
 
-`$ sudo okd-installation-centos/provisioning/install_prerequisites.sh`
+`$ cd okd-installation-centos/provisioning/`
+
+`$ ./install_prerequisites.sh`
 
 ## **_Step 7_**
 
 **_Enable SSH to communicate all the other "worker/infra nodes" from "master" without "password". All the below commands needs to be executed on "master" node only_**
 
-- `100.10.10.100 (okd-master-node-1)`
+- `100.10.10.100 (master-1.100.10.10.100.nip.io)`
 
 **_Unix Command!!!_**
 
@@ -139,11 +137,13 @@ _Example copy to root folder and execution permissions can be applied by executi
 
 **_Execute the below script only on master node_**
 
-- `100.10.10.100 (okd-master-node-1)`
+- `100.10.10.100 (master-1.100.10.10.100.nip.io)`
 
 **_Unix Command!!!_**
 
-`$ sudo okd-installation-centos/provisioning/install_master.sh`
+`$ cd okd-installation-centos/provisioning/`
+
+`$ ./install_master.sh`
 
 ## **_Step 9_**
 
