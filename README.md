@@ -312,7 +312,7 @@ To confirm that a node can reach another node:
     round-trip min/avg/max/stddev = 0.573/0.573/0.573/0.000 ms
     ```
 
-    Or use the `ping.sh` file
+All three steps could be replaced by run the `ping.sh` command file
 
     ```
     $ cd okd-installation-centos/provisioning/
