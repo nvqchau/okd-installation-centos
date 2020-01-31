@@ -6,6 +6,8 @@ cat >>/etc/hosts<<EOF
 ${OKD_MASTER_NODE_1_IP} ${OKD_MASTER_NODE_1_HOSTNAME} console console.${DOMAIN}
 ${OKD_INFRA_NODE_1_IP} ${OKD_INFRA_NODE_1_HOSTNAME}
 ${OKD_WORKER_NODE_1_IP} ${OKD_WORKER_NODE_1_HOSTNAME}
+${OKD_WORKER_NODE_2_IP} ${OKD_WORKER_NODE_2_HOSTNAME}
+${OKD_WORKER_NODE_3_IP} ${OKD_WORKER_NODE_3_HOSTNAME}
 
 EOF
 
@@ -31,7 +33,12 @@ yum install -y python2-pip
 yum install -y python-devel
 yum install -y python-passlib
 yum install -y java-1.8.0-openjdk-headless "@Development Tools"
-yum install -y epel-release
+
+# Update the system to the latest packages
+yum update -y
+
+# Install the EPEL repository
+yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 # Disable the EPEL repository globally so that is not accidentally used during later steps of the installation
 sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo

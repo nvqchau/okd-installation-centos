@@ -13,6 +13,8 @@ ${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP}
 ${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP} openshift_node_group_name='node-config-master'
 ${OKD_INFRA_NODE_1_IP} openshift_ip=${OKD_INFRA_NODE_1_IP} openshift_node_group_name='node-config-infra'
 ${OKD_WORKER_NODE_1_IP} openshift_ip=${OKD_WORKER_NODE_1_IP} openshift_node_group_name='node-config-compute'
+${OKD_WORKER_NODE_2_IP} openshift_ip=${OKD_WORKER_NODE_2_IP} openshift_node_group_name='node-config-compute'
+${OKD_WORKER_NODE_3_IP} openshift_ip=${OKD_WORKER_NODE_3_IP} openshift_node_group_name='node-config-compute'
 
 [OSEv3:vars]
 openshift_additional_repos=[{'id': 'centos-paas', 'name': 'centos-paas', 'baseurl' :'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-origin311', 'gpgcheck' :'0', 'enabled' :'1'}]
@@ -21,6 +23,8 @@ ansible_ssh_user=root
 enable_excluders=False
 enable_docker_excluder=False
 ansible_service_broker_install=False
+
+os_firewall_use_firewalld=True
 
 containerized=True
 os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'

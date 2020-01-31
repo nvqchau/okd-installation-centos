@@ -6,8 +6,9 @@ envsubst < inventory.download > inventory.ini
 
 # install the packages for Ansible
 yum -y --enablerepo=epel install ansible pyOpenSSL
-curl -o ansible.rpm https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.7.10-1.el7.ans.noarch.rpm
-yum -y --enablerepo=epel install ansible.rpm
+#curl -o ansible.rpm https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
+#yum -y --enablerepo=epel install ansible.rpm
+yum -y --enablerepo=epel install https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.7.10-1.el7.ans.noarch.rpm
 
 # checkout openshift-ansible repository
 [ ! -d openshift-ansible ] && git clone https://github.com/openshift/openshift-ansible.git
@@ -36,7 +37,7 @@ kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceac
 helm init --service-account tiller --upgrade
 
 
-echo "#####################################################################"
+echo "######################################################################################"
 echo "* Your console is https://console.$DOMAIN:$API_PORT"
 echo "* Your username is $OKD_USERNAME "
 echo "* Your password is $OKD_PASSWORD "
@@ -44,6 +45,6 @@ echo "*"
 echo "* Login using:"
 echo "*"
 echo "$ oc login -u ${OKD_USERNAME} -p ${OKD_PASSWORD} https://console.$DOMAIN:$API_PORT/"
-echo "#####################################################################"
+echo "######################################################################################"
 
 oc login -u ${OKD_USERNAME} -p ${OKD_PASSWORD} https://console.$DOMAIN:$API_PORT/
