@@ -26,7 +26,7 @@ _This repository is used to create **OKD 3.11 Clusters** with **10** simple step
 
 > **_Note: We are not going to create any VM's during this process. User is expected to have VM's before proceeding with this repository_**
 
-\* Below is the **_example configuration_** that we are going to refer **_through out this repository_**.\*
+_Below is the **_example configuration_** that we are going to refer **_through out this repository_**._
 
 | _Name_                              | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
 | ----------------------------------- | --------------- | --------- | ----- | ----- | --------- |
@@ -336,7 +336,7 @@ $ oc get projects
 
 The **_okd console_** can be accessed via the below URL from your local machine
 
-[`https://console.okd.nip.io:8443`](https://console.okd.nip.io:8443)
+- [`https://console.okd.nip.io:8443`](https://console.okd.nip.io:8443)
 
 > The below setting will be used to access OKD console `https://console.$DOMAIN:$API_PORT`.
 >
