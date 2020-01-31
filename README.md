@@ -26,7 +26,7 @@ _This repository is used to create **OKD 3.11 Clusters** with **10** simple step
 
 > **_Note: We are not going to create any VM's during this process. User is expected to have VM's before proceeding with this repository_**
 
-_Below is the **_example configuration_** that we are going to refer **_through out this repository_**._
+_Below is the **example configuration** that we are going to refer **through out this repository**._
 
 | _Name_                              | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
 | ----------------------------------- | --------------- | --------- | ----- | ----- | --------- |
@@ -153,7 +153,7 @@ To verify that hosts can be resolved by your DNS server:
     nameserver 8.8.8.8
     ```
 
-    In this example, 8.8.8.8 is the address of our DNS server.
+    In this example, `8.8.8.8` is the address of our DNS server.
 
 2.  Test that the DNS servers listed in **/etc/resolv.conf** are able to resolve host names to the IP addresses of all nodes in your OKD environment:
 
