@@ -173,7 +173,7 @@ To verify that hosts can be resolved by your DNS server:
 
 ## **_Step 4_**
 
-**_Enable SELINUX=enforcing on all master/worker/infra nodes_**
+**_Enable SELINUX=enforcing on all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
@@ -310,7 +310,7 @@ $ ssh-copy-id 192.168.1.112
 
 ## **_Step 9:_**
 
-**_Execute the below script only on master node_**
+**_Execute the below script on master node only_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 
