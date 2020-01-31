@@ -60,34 +60,6 @@ $ vi /etc/hostname
 $ nmtui hostname
 ```
 
-To confirm that a node can reach another node:
-
-1. On one node, obtain the host name:
-
-   ```
-   $ hostname
-   okd-master1.192.168.1.100.nip.io
-   ```
-
-2. On that same node, obtain the fully qualified domain name of the host:
-
-   ```
-   $ hostname -f
-   okd-master1.192.168.1.100.nip.io
-   ```
-
-3. From a different node, confirm that you can reach the first node:
-
-   ```
-   $ ping okd-master1.192.168.1.100.nip.io -c 1
-   PING okd-master1.192.168.1.100.nip.io (192.168.1.100): 56 data bytes
-   64 bytes from 192.168.1.100: icmp_seq=0 ttl=64 time=0.573 ms
-
-   --- okd-master1.192.168.1.100.nip.io ping statistics ---
-   1 packets transmitted, 1 packets received, 0.0% packet loss
-   round-trip min/avg/max/stddev = 0.573/0.573/0.573/0.000 ms
-   ```
-
 ## **_Step 2: DNS Requirements_**
 
 **_Update the system all nodes_**
@@ -290,6 +262,8 @@ $ ./install_prerequisites.sh
 
 ## **_Step 8: Reboot all nodes_**
 
+**_Execute the below script on all nodes_**
+
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
@@ -300,7 +274,87 @@ $ ./install_prerequisites.sh
 $ reboot
 ```
 
-## **_Step 9:_**
+## **_Step 9: Check if all nodes can talk to each others_**
+
+**_Execute the below script on all nodes_**
+
+- `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
+- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
+- `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
+- `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
+- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
+
+To confirm that a node can reach another node:
+
+1.  On one node, obtain the host name:
+
+    ```
+    $ hostname
+    okd-master1.192.168.1.100.nip.io
+    ```
+
+2.  On that same node, obtain the fully qualified domain name of the host:
+
+    ```
+    $ hostname -f
+    okd-master1.192.168.1.100.nip.io
+    ```
+
+3.  From a different node, confirm that you can reach the first node:
+
+    ```
+    $ ping okd-master1.192.168.1.100.nip.io -c 1
+    PING okd-master1.192.168.1.100.nip.io (192.168.1.100): 56 data bytes
+    64 bytes from 192.168.1.100: icmp_seq=0 ttl=64 time=0.573 ms
+    
+    --- okd-master1.192.168.1.100.nip.io ping statistics ---
+    1 packets transmitted, 1 packets received, 0.0% packet loss
+    round-trip min/avg/max/stddev = 0.573/0.573/0.573/0.000 ms
+    ```
+
+    Or use the `ping.sh` file
+
+    ```
+    $ cd okd-installation-centos/provisioning/
+
+    $ ./ping.sh
+    PING okd-master1.192.168.1.100.nip.io (192.168.1.100): 56 data bytes
+    64 bytes from 192.168.1.100: icmp_seq=0 ttl=64 time=1.040 ms
+
+    --- okd-master1.192.168.1.100.nip.io ping statistics ---
+    1 packets transmitted, 1 packets received, 0.0% packet loss
+    round-trip min/avg/max/stddev = 1.040/1.040/1.040/0.000 ms
+
+    PING okd-infra1.192.168.1.105.nip.io (192.168.1.105): 56 data bytes
+    64 bytes from 192.168.1.105: icmp_seq=0 ttl=64 time=1.078 ms
+
+    --- okd-infra1.192.168.1.105.nip.io ping statistics ---
+    1 packets transmitted, 1 packets received, 0.0% packet loss
+    round-trip min/avg/max/stddev = 1.078/1.078/1.078/0.000 ms
+
+    PING okd-compute1.192.168.1.110.nip.io (192.168.1.110): 56 data bytes
+    64 bytes from 192.168.1.110: icmp_seq=0 ttl=64 time=0.708 ms
+
+    --- okd-compute1.192.168.1.110.nip.io ping statistics ---
+    1 packets transmitted, 1 packets received, 0.0% packet loss
+    round-trip min/avg/max/stddev = 0.708/0.708/0.708/0.000 ms
+
+    PING okd-compute2.192.168.1.111.nip.io (192.168.1.111): 56 data bytes
+    64 bytes from 192.168.1.111: icmp_seq=0 ttl=64 time=0.530 ms
+
+    --- okd-compute2.192.168.1.111.nip.io ping statistics ---
+    1 packets transmitted, 1 packets received, 0.0% packet loss
+    round-trip min/avg/max/stddev = 0.530/0.530/0.530/0.000 ms
+
+    PING okd-compute3.192.168.1.112.nip.io (192.168.1.112): 56 data bytes
+    64 bytes from 192.168.1.112: icmp_seq=0 ttl=64 time=0.543 ms
+
+    --- okd-compute3.192.168.1.112.nip.io ping statistics ---
+    1 packets transmitted, 1 packets received, 0.0% packet loss
+    round-trip min/avg/max/stddev = 0.543/0.543/0.543/0.000 ms
+    ```
+
+## **_Step 10:_**
 
 **_Enable SSH to communicate all the other "worker/infra nodes" from "master" without "password". All the below commands needs to be executed on "master" node only_**
 
@@ -318,80 +372,6 @@ $ ssh-copy-id 192.168.1.110
 $ ssh-copy-id 192.168.1.111
 
 $ ssh-copy-id 192.168.1.112
-```
-
-## **_Step 11: Check if all nodes can talk to each others_**
-
-**_Execute the below script on all nodes_**
-
-- `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
-- `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
-- `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
-
-```
-$ cd okd-installation-centos/provisioning/
-```
-```
-$ ./ping.sh
-PING okd-master1.192.168.1.100.nip.io (192.168.1.100): 56 data bytes
-64 bytes from 192.168.1.100: icmp_seq=0 ttl=64 time=1.040 ms
-
---- okd-master1.192.168.1.100.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 1.040/1.040/1.040/0.000 ms
-
-PING okd-infra1.192.168.1.105.nip.io (192.168.1.105): 56 data bytes
-64 bytes from 192.168.1.105: icmp_seq=0 ttl=64 time=1.078 ms
-
---- okd-infra1.192.168.1.105.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 1.078/1.078/1.078/0.000 ms
-
-PING okd-compute1.192.168.1.110.nip.io (192.168.1.110): 56 data bytes
-64 bytes from 192.168.1.110: icmp_seq=0 ttl=64 time=0.708 ms
-
---- okd-compute1.192.168.1.110.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 0.708/0.708/0.708/0.000 ms
-
-PING okd-compute2.192.168.1.111.nip.io (192.168.1.111): 56 data bytes
-64 bytes from 192.168.1.111: icmp_seq=0 ttl=64 time=0.530 ms
-
---- okd-compute2.192.168.1.111.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 0.530/0.530/0.530/0.000 ms
-
-PING okd-compute3.192.168.1.112.nip.io (192.168.1.112): 56 data bytes
-64 bytes from 192.168.1.112: icmp_seq=0 ttl=64 time=0.543 ms
-
---- okd-compute3.192.168.1.112.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 0.543/0.543/0.543/0.000 ms
-```
-```
-$ ansible all -m ping
-192.168.1.100 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-192.168.1.105 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-192.168.1.110 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-192.168.1.111 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-192.168.1.112 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
 ```
 
 ## **_Step 11:_**
