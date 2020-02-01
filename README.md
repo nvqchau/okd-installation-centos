@@ -377,9 +377,7 @@ $ ssh-copy-id 192.168.1.112
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 
 ```
-$ cd okd-installation-centos/provisioning/
-
-$ ./install_master.sh
+$ ./okd-installation-centos/provisioning/install_master.sh
 ```
 
 ## **_Step 12_**
