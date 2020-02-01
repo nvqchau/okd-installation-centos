@@ -2,7 +2,7 @@
 
 source ${BASH_SOURCE%/*}/settings.sh
 
-envsubst < inventory.download > inventory.ini
+envsubst < ${BASH_SOURCE%/*}/inventory.download > inventory.ini
 
 # install the packages for Ansible
 yum -y --enablerepo=epel install ansible pyOpenSSL
