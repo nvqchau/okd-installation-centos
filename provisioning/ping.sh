@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source settings.sh
+source ${BASH_SOURCE%/*}/settings.sh
 
 ping ${OKD_MASTER_NODE_1_HOSTNAME} -c 1
 ping ${OKD_INFRA_NODE_1_HOSTNAME} -c 1

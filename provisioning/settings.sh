@@ -22,12 +22,12 @@ export OKD_WORKER_NODE_1_HOSTNAME=okd-compute1.192.168.1.110.nip.io
 
 #OKD Worker Node 2 Configuration
 export OKD_WORKER_NODE_2_IP=192.168.1.111
-export OKD_WORKER_NODE_1_SUBDOMAIN=okd-compute2
+export OKD_WORKER_NODE_2_SUBDOMAIN=okd-compute2
 export OKD_WORKER_NODE_2_HOSTNAME=okd-compute2.192.168.1.111.nip.io
 
 #OKD Worker Node 3 Configuration
 export OKD_WORKER_NODE_3_IP=192.168.1.112
-export OKD_WORKER_NODE_1_SUBDOMAIN=okd-compute3
+export OKD_WORKER_NODE_3_SUBDOMAIN=okd-compute3
 export OKD_WORKER_NODE_3_HOSTNAME=okd-compute3.192.168.1.112.nip.io
 
 #The  below setting will be used to access OKD console https://console.$DOMAIN:$API_PORT

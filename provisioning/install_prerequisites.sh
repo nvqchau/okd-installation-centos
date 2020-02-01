@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source settings.sh
+source ${BASH_SOURCE%/*}/settings.sh
 
 cat >>/etc/hosts<<EOF
 ${OKD_MASTER_NODE_1_IP} ${OKD_MASTER_NODE_1_HOSTNAME} ${OKD_MASTER_NODE_1_SUBDOMAIN} console console.${DOMAIN}

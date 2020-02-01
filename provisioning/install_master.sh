@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source settings.sh
+source ${BASH_SOURCE%/*}/settings.sh
 
 envsubst < inventory.download > inventory.ini
 
