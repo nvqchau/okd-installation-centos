@@ -8,6 +8,8 @@ envsubst < inventory.download > inventory.ini
 yum -y --enablerepo=epel install ansible pyOpenSSL
 #curl -o ansible.rpm https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
 #yum -y --enablerepo=epel install ansible.rpm
+# By default, yum install ansible version 2.9, but here we need 2.7
+yum remove -y ansible
 yum -y --enablerepo=epel install https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.7.10-1.el7.ans.noarch.rpm
 
 # checkout openshift-ansible repository
