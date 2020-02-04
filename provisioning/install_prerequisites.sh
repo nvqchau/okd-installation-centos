@@ -18,7 +18,6 @@ yum install -y git
 yum install -y zile
 yum install -y nano
 yum install -y net-tools
-yum install -y docker-1.13.1
 yum install -y bind-utils iptables-services
 yum install -y bridge-utils bash-completion
 yum install -y kexec-tools
@@ -32,6 +31,16 @@ yum install -y python2-pip
 yum install -y python-devel
 yum install -y python-passlib
 yum install -y java-1.8.0-openjdk-headless "@Development Tools"
+
+yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+yum-config-manager \
+  --add-repo \
+  https://download.docker.com/linux/centos/docker-ce.repo
+
+yum install docker-ce docker-ce-cli containerd.io
 
 # Update the system to the latest packages
 yum update -y
