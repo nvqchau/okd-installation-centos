@@ -31,7 +31,6 @@ _Below is the **example configuration** that we are going to refer **through out
 | _Name_                              | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
 | ----------------------------------- | --------------- | --------- | ----- | ----- | --------- |
 | _okd-master1.192.168.1.100.nip.io_  | _192.168.1.100_ | _CentOS7_ | _4GB_ | _2_   | _40GB_    |
-| _okd-infra1.192.168.1.105.nip.io_   | _192.168.1.105_ | _CentOS7_ | _4GB_ | _2_   | _40GB_    |
 | _okd-compute1.192.168.1.110.nip.io_ | _192.168.1.110_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
 | _okd-compute2.192.168.1.111.nip.io_ | _192.168.1.111_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
 | _okd-compute3.192.168.1.112.nip.io_ | _192.168.1.112_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
@@ -45,7 +44,6 @@ _Below is the **example configuration** that we are going to refer **through out
 **_Update the host names for all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -65,7 +63,6 @@ $ nmtui hostname
 **_Update the system all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -105,7 +102,6 @@ If you do not have a properly functioning DNS environment, you might experience 
 ## **_Step 3: Configuring hosts to use DNS for all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -148,7 +144,6 @@ To verify that hosts can be resolved by your DNS server:
 **_Enable SELINUX=enforcing on all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -166,7 +161,6 @@ $ sestatus
 ## **_Step 5: Reboot all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -178,7 +172,6 @@ $ reboot
 ## **_Step 6: Prepare environment variables for all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -208,11 +201,6 @@ export OKD_MASTER_NODE_1_IP=192.168.1.100
 export OKD_MASTER_NODE_1_SUBDOMAIN=okd-master1
 export OKD_MASTER_NODE_1_HOSTNAME=okd-master1.192.168.1.100.nip.io
 
-#OKD Infra Node 1 Configuration
-export OKD_INFRA_NODE_1_IP=192.168.1.105
-export OKD_INFRA_NODE_1_SUBDOMAIN=okd-infra1
-export OKD_INFRA_NODE_1_HOSTNAME=okd-infra1.192.168.1.105.nip.io
-
 #OKD Worker Node 1 Configuration
 export OKD_WORKER_NODE_1_IP=192.168.1.110
 export OKD_WORKER_NODE_1_SUBDOMAIN=okd-compute1
@@ -230,7 +218,8 @@ export OKD_WORKER_NODE_3_HOSTNAME=okd-compute3.192.168.1.112.nip.io
 
 #The  below setting will be used to access OKD console https://console.$DOMAIN:$API_PORT
 #By default we can login using the URL https://console.okd.nip.io:8443
-#To access URL from your local system we need to configure master host in C:\Windows\System32\drivers\etc\hosts (Windows) or /private/etc/hosts (MacOS) file as below
+#To access URL from your local system we need to configure master host in
+#C:\Windows\System32\drivers\etc\hosts (Windows) or /private/etc/hosts (MacOS) file as below
 #192.168.1.100    console.okd.nip.io
 
 export DOMAIN=okd.nip.io
@@ -254,7 +243,6 @@ export INSTALL_LOGGING=False
 **_Execute the below script on all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -268,7 +256,6 @@ $ ./okd-installation-centos/provisioning/install_prerequisites.sh
 **_Execute the below script on all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -282,7 +269,6 @@ $ reboot
 **_Execute the below script on all nodes_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
-- `192.168.1.105 (okd-infra1.192.168.1.105.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
 - `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
@@ -326,13 +312,6 @@ PING okd-master1.192.168.1.100.nip.io (192.168.1.100): 56 data bytes
 1 packets transmitted, 1 packets received, 0.0% packet loss
 round-trip min/avg/max/stddev = 1.040/1.040/1.040/0.000 ms
 
-PING okd-infra1.192.168.1.105.nip.io (192.168.1.105): 56 data bytes
-64 bytes from 192.168.1.105: icmp_seq=0 ttl=64 time=1.078 ms
-
---- okd-infra1.192.168.1.105.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 1.078/1.078/1.078/0.000 ms
-
 PING okd-compute1.192.168.1.110.nip.io (192.168.1.110): 56 data bytes
 64 bytes from 192.168.1.110: icmp_seq=0 ttl=64 time=0.708 ms
 
@@ -357,7 +336,7 @@ round-trip min/avg/max/stddev = 0.543/0.543/0.543/0.000 ms
 
 ## **_Step 10:_**
 
-**_Enable SSH to communicate all the other "worker/infra nodes" from "master" without "password". All the below commands needs to be executed on "master" node only_**
+**_Enable SSH to communicate all the other "worker nodes" from "master" without "password". All the below commands needs to be executed on "master" node only_**
 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 

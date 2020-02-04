@@ -10,8 +10,7 @@ ${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP} openshift_schedulab
 ${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP}
 
 [nodes]
-${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP} openshift_node_group_name='node-config-master'
-${OKD_INFRA_NODE_1_IP} openshift_ip=${OKD_INFRA_NODE_1_IP} openshift_node_group_name='node-config-infra'
+${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP} openshift_node_group_name='node-config-master-infra'
 ${OKD_WORKER_NODE_1_IP} openshift_ip=${OKD_WORKER_NODE_1_IP} openshift_node_group_name='node-config-compute'
 ${OKD_WORKER_NODE_2_IP} openshift_ip=${OKD_WORKER_NODE_2_IP} openshift_node_group_name='node-config-compute'
 ${OKD_WORKER_NODE_3_IP} openshift_ip=${OKD_WORKER_NODE_3_IP} openshift_node_group_name='node-config-compute'

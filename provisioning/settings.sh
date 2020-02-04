@@ -10,11 +10,6 @@ export OKD_MASTER_NODE_1_IP=192.168.1.100
 export OKD_MASTER_NODE_1_SUBDOMAIN=okd-master1
 export OKD_MASTER_NODE_1_HOSTNAME=okd-master1.192.168.1.100.nip.io
 
-#OKD Infra Node 1 Configuration
-export OKD_INFRA_NODE_1_IP=192.168.1.105
-export OKD_INFRA_NODE_1_SUBDOMAIN=okd-infra1
-export OKD_INFRA_NODE_1_HOSTNAME=okd-infra1.192.168.1.105.nip.io
-
 #OKD Worker Node 1 Configuration
 export OKD_WORKER_NODE_1_IP=192.168.1.110
 export OKD_WORKER_NODE_1_SUBDOMAIN=okd-compute1
