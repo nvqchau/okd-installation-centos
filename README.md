@@ -345,8 +345,6 @@ $ ssh-keygen
 
 $ ssh-copy-id 192.168.1.100
 
-$ ssh-copy-id 192.168.1.105
-
 $ ssh-copy-id 192.168.1.110
 
 $ ssh-copy-id 192.168.1.111

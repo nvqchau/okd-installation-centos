@@ -18,6 +18,7 @@ yum install -y git
 yum install -y zile
 yum install -y nano
 yum install -y net-tools
+yum install -y docker-1.13.1
 yum install -y bind-utils iptables-services
 yum install -y bridge-utils bash-completion
 yum install -y kexec-tools
@@ -31,33 +32,10 @@ yum install -y python2-pip
 yum install -y python-devel
 yum install -y python-passlib
 yum install -y java-1.8.0-openjdk-headless "@Development Tools"
-
-yum remove -y docker \
-           docker-client \
-           docker-client-latest \
-           docker-common \
-           docker-latest \
-           docker-latest-logrotate \
-           docker-logrotate \
-           docker-engine
-
-yum install -y yum-utils \
-               device-mapper-persistent-data \
-               lvm2
-
-yum-config-manager \
-  --add-repo \
-  https://download.docker.com/linux/centos/docker-ce.repo
-
-yum install -y docker-ce \
-               docker-ce-cli \
-               containerd.io
+yum install -y epel-release
 
 # Update the system to the latest packages
 yum update -y
-
-# Install the EPEL repository
-yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 # Disable the EPEL repository globally so that is not accidentally used during later steps of the installation
 sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
