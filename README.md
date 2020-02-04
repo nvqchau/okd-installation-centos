@@ -30,7 +30,7 @@ _Below is the **example configuration** that we are going to refer **through out
 
 | _Name_                              | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
 | ----------------------------------- | --------------- | --------- | ----- | ----- | --------- |
-| _okd-master1.192.168.1.100.nip.io_  | _192.168.1.100_ | _CentOS7_ | _4GB_ | _2_   | _40GB_    |
+| _okd-master1.192.168.1.100.nip.io_  | _192.168.1.100_ | _CentOS7_ | _8GB_ | _4_   | _80GB_    |
 | _okd-compute1.192.168.1.110.nip.io_ | _192.168.1.110_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
 | _okd-compute2.192.168.1.111.nip.io_ | _192.168.1.111_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
 | _okd-compute3.192.168.1.112.nip.io_ | _192.168.1.112_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
