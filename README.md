@@ -31,9 +31,8 @@ _Below is the **example configuration** that we are going to refer **through out
 | _Name_                              | _IP_            | _OS_      | _RAM_ | _CPU_ | _Storage_ |
 | ----------------------------------- | --------------- | --------- | ----- | ----- | --------- |
 | _okd-master1.192.168.1.100.nip.io_  | _192.168.1.100_ | _CentOS7_ | _8GB_ | _4_   | _80GB_    |
-| _okd-compute1.192.168.1.110.nip.io_ | _192.168.1.110_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
-| _okd-compute2.192.168.1.111.nip.io_ | _192.168.1.111_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
-| _okd-compute3.192.168.1.112.nip.io_ | _192.168.1.112_ | _CentOS7_ | _1GB_ | _1_   | _20GB_    |
+| _okd-compute1.192.168.1.110.nip.io_ | _192.168.1.110_ | _CentOS7_ | _2GB_ | _1_   | _20GB_    |
+| _okd-compute2.192.168.1.111.nip.io_ | _192.168.1.111_ | _CentOS7_ | _2GB_ | _1_   | _20GB_    |
 
 <a id="deploy"></a>
 
@@ -46,7 +45,6 @@ _Below is the **example configuration** that we are going to refer **through out
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 When you set up a cluster that is not integrated with a cloud provider, you must correctly set your nodes' host names. Each node’s host name must be resolvable, and each node must be able to reach each other node.
 
@@ -65,7 +63,6 @@ $ nmtui hostname
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 OKD requires a fully functional DNS server in the environment. This is ideally a separate host running DNS software and can provide name resolution to hosts and containers running on the platform.
 
@@ -104,7 +101,6 @@ If you do not have a properly functioning DNS environment, you might experience 
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 Make sure each host in your environment is configured to resolve hostnames from your DNS server. The configuration for hosts' DNS resolution depend on whether DHCP is enabled. If DHCP is:
 
@@ -146,7 +142,6 @@ To verify that hosts can be resolved by your DNS server:
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 ```
 $ vi /etc/selinux/config
@@ -163,7 +158,6 @@ $ sestatus
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 ```
 $ reboot
@@ -174,7 +168,6 @@ $ reboot
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 **_Checkout the code "okd-installation-centos" folder_**
 
@@ -211,18 +204,13 @@ export OKD_WORKER_NODE_2_IP=192.168.1.111
 export OKD_WORKER_NODE_2_SUBDOMAIN=okd-compute2
 export OKD_WORKER_NODE_2_HOSTNAME=okd-compute2.192.168.1.111.nip.io
 
-#OKD Worker Node 3 Configuration
-export OKD_WORKER_NODE_3_IP=192.168.1.112
-export OKD_WORKER_NODE_3_SUBDOMAIN=okd-compute3
-export OKD_WORKER_NODE_3_HOSTNAME=okd-compute3.192.168.1.112.nip.io
-
-#The  below setting will be used to access OKD console https://console.$DOMAIN:$API_PORT
+#The below setting will be used to access OKD console https://console.$DOMAIN:$API_PORT
 #By default we can login using the URL https://console.okd.nip.io:8443
 #To access URL from your local system we need to configure master host in
 #C:\Windows\System32\drivers\etc\hosts (Windows) or /private/etc/hosts (MacOS) file as below
 #192.168.1.100    console.okd.nip.io
 
-export DOMAIN=okd.nip.io
+export DOMAIN=192.168.1.100.nip.io # use IP with nip.io service instead of.
 export API_PORT=8443
 
 #OKD Login Credentials
@@ -232,7 +220,7 @@ export OKD_PASSWORD=admin
 
 #OKD Add-Ons
 #Enable "True"  only if one of the VM has 4GB memory.
-export INSTALL_METRICS=False
+export INSTALL_METRICS=True
 
 # Enable "True"  only one of the VM 16GB memory. 
 export INSTALL_LOGGING=False
@@ -245,7 +233,6 @@ export INSTALL_LOGGING=False
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 ```
 $ ./okd-installation-centos/provisioning/install_prerequisites.sh
@@ -258,7 +245,6 @@ $ ./okd-installation-centos/provisioning/install_prerequisites.sh
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 ```
 $ reboot
@@ -271,7 +257,6 @@ $ reboot
 - `192.168.1.100 (okd-master1.192.168.1.100.nip.io)`
 - `192.168.1.110 (okd-compute1.192.168.1.110.nip.io)`
 - `192.168.1.111 (okd-compute2.192.168.1.111.nip.io)`
-- `192.168.1.112 (okd-compute3.192.168.1.112.nip.io)`
 
 To confirm that a node can reach another node:
 
@@ -325,13 +310,6 @@ PING okd-compute2.192.168.1.111.nip.io (192.168.1.111): 56 data bytes
 --- okd-compute2.192.168.1.111.nip.io ping statistics ---
 1 packets transmitted, 1 packets received, 0.0% packet loss
 round-trip min/avg/max/stddev = 0.530/0.530/0.530/0.000 ms
-
-PING okd-compute3.192.168.1.112.nip.io (192.168.1.112): 56 data bytes
-64 bytes from 192.168.1.112: icmp_seq=0 ttl=64 time=0.543 ms
-
---- okd-compute3.192.168.1.112.nip.io ping statistics ---
-1 packets transmitted, 1 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 0.543/0.543/0.543/0.000 ms
 ```
 
 ## **_Step 10:_**
@@ -348,8 +326,6 @@ $ ssh-copy-id 192.168.1.100
 $ ssh-copy-id 192.168.1.110
 
 $ ssh-copy-id 192.168.1.111
-
-$ ssh-copy-id 192.168.1.112
 ```
 
 ## **_Step 11:_**
@@ -378,7 +354,7 @@ $ oc get projects
 
 The **_okd console_** can be accessed via the below URL from your local machine
 
-- [`https://console.okd.nip.io:8443`](https://console.okd.nip.io:8443)
+- [`https://console.192.168.1.100.nip.io:8443`](https://console.192.168.1.100.nip.io:8443)
 
 > The below setting will be used to access OKD console `https://console.$DOMAIN:$API_PORT`.
 >

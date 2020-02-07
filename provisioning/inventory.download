@@ -13,7 +13,6 @@ ${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP}
 ${OKD_MASTER_NODE_1_IP} openshift_ip=${OKD_MASTER_NODE_1_IP} openshift_node_group_name='node-config-master-infra'
 ${OKD_WORKER_NODE_1_IP} openshift_ip=${OKD_WORKER_NODE_1_IP} openshift_node_group_name='node-config-compute'
 ${OKD_WORKER_NODE_2_IP} openshift_ip=${OKD_WORKER_NODE_2_IP} openshift_node_group_name='node-config-compute'
-${OKD_WORKER_NODE_3_IP} openshift_ip=${OKD_WORKER_NODE_3_IP} openshift_node_group_name='node-config-compute'
 
 [OSEv3:vars]
 openshift_additional_repos=[{'id': 'centos-paas', 'name': 'centos-paas', 'baseurl' :'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-origin311', 'gpgcheck' :'0', 'enabled' :'1'}]
